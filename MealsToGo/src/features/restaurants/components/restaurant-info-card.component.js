@@ -17,11 +17,6 @@ const RestaurantCardCover = styled(Card.Cover)`
   background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 
-const Address = styled(Text)`
-  font-family: ${(props) => props.theme.fonts.body};
-  font-size: ${(props) => props.theme.fontSizes.caption};
-`;
-
 const Title = styled(Text)`
   font-family: ${(props) => props.theme.fonts.heading};
   font-size: ${(props) => props.theme.fontSizes.body};
@@ -51,12 +46,11 @@ const SectionEnd = styled.View`
 
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
-    name = 'UNGUARDED Restaurant',
+    name = '                           UNGUARDED Sticker',
     icon = 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
     photos = [
-      'https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg',
+      'file:///Users/salmanhasan/Downloads/Untitled%20design%20-%202023-10-28T150231.580.png',
     ],
-    address = '409 blossom circle dayton nj 08810',
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = true,
@@ -77,8 +71,8 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
           </Rating>
           <SectionEnd>
             {isClosedTemporarily && (
-              <Text variant="label" style={{ color: 'red' }}>
-                CLOSED TEMPORARILY
+              <Text variant="label" style={{ color: 'black' }}>
+                OPEN
               </Text>
             )}
             <Spacer position="left" size="large">
@@ -89,7 +83,6 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
             </Spacer>
           </SectionEnd>
         </Section>
-        <Address>{address}</Address>
       </Info>
     </RestaurantCard>
   );
