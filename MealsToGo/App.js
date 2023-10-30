@@ -18,22 +18,31 @@ import { SafeArea } from './src/components/safe-area.component';
 
 const Tab = createBottomTabNavigator();
 
-const Settings = () => (
-  <SafeArea>
-    <Text>Settings</Text>
-  </SafeArea>
-);
-const shoppingcart = () => (
-  <SafeArea>
-    <Text>Shopping Cart</Text>
-  </SafeArea>
-);
+const TAB_ICON = {
+  Store: 'shoppingcart',
+  Content: 'videocamera',
+  Qrcode: 'qrcode',
+};
 
 const qrcode = () => (
   <SafeArea>
     <Text>qrcode</Text>
   </SafeArea>
 );
+const Content = () => (
+  <SafeArea>
+    <Text>Content</Text>
+  </SafeArea>
+);
+
+const createScreenOptions = ({ route }) => {
+  const iconName = TAB_ICON[route.name];
+  return {
+    tabBarIcon: ({ size, color }) => (
+      <AntDesign name={iconName} size={size} color={color} />
+    ),
+  };
+};
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
@@ -53,29 +62,15 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <NavigationContainer>
           <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ color, size }) => {
-                let iconName;
-                if (route.name === 'Content') {
-                  iconName = 'videocamera';
-                } else if (route.name === 'Shopping Cart') {
-                  iconName = 'shoppingcart';
-                } else if (route.name === 'qrcode') {
-                  iconName = 'qrcode';
-                }
-
-                // You can return any component that you like here!
-                return <AntDesign name={iconName} size={size} color={color} />;
-              },
-            })}
+            screenOptions={createScreenOptions}
             tabBarOptions={{
               activeTintColor: 'tomato',
               inactiveTintColor: 'gray',
             }}
           >
-            <Tab.Screen name="Content" component={RestaurantsScreen} />
-            <Tab.Screen name="Shopping Cart" component={shoppingcart} />
-            <Tab.Screen name="qrcode" component={qrcode} />
+            <Tab.Screen name="Store" component={RestaurantsScreen} />
+            <Tab.Screen name="Content" component={Content} />
+            <Tab.Screen name="Qrcode" component={qrcode} />
           </Tab.Navigator>
         </NavigationContainer>
       </ThemeProvider>
